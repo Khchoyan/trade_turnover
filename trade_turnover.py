@@ -366,7 +366,6 @@ def main():
     now = datetime.datetime.now().year
     last_year_in_table = pd.to_datetime(pd.read_excel('rez_file_Y_v2.xlsx').dropna(subset=['Розничный товарооборот']).iloc[
                                             -1]['Целевой показатель']).year
-    print(last_year_in_table)
     new_data = {}
     kvartal_data = {}
     if now - last_year_in_table < 1:
@@ -375,13 +374,10 @@ def main():
         years = []
         for y in range(last_year_in_table, now + 1):
             years.append(y)
-    print(years)
     for year in years:
         time.sleep(15)
         links_data = pars_year_by_months(year)
         links_data, idx = check_last_month_in_table(links_data, year)
-        print(links_data)
-        print(idx)
         if links_data.empty:
             continue
         else:
